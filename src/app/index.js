@@ -11,10 +11,12 @@ userForm.addEventListener('submit',(e) => {
   if(textSearch !== ''){
     github.fetchUser(textSearch)
       .then(data => {
-        if(data.message === 'Not Found'){
-          console.log('User not exists');
+        if(data.userData.message === 'Not Found'){
+          ui.showMessage('User Not Exist','alert alert-danger col-md-12 mt-2 animated')
+        }else{
+          ui.showProfile(data.userData);
+          ui.showRepos(data.userRepos);
         }
-        ui.showProfile();
       })
   }
 });
